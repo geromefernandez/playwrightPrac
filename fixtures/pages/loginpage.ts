@@ -1,18 +1,22 @@
-import {Page} from '@playwright/test'
+import { expect, type Locator, type Page } from '@playwright/test';
 
+export class LoginPage {
+  readonly page: Page
 
-class logInPageActions{
-    private page: Page | undefined
+  readonly hamburgerMenu : string = "//a[@id='nav-hamburger-menu']"
+  private signInLink : string ="//div[@id='hmenu-customer-name']"
 
-    constructor(page: Page) {
-        this.page = this.page
-      }
-    
+  constructor(page: Page) {
+    this.page = page;
+  }
 
-    async navigateToUrl(url :string){
-        await this.page.goto(url)
+  async goto(url : string) {
+    await this.page.goto(url);
+  }
 
-    }
+  async signIntoAmazon() {
+    await this.page.locator(this.hamburgerMenu).click();
+    await this.page.locator(this.signInLink).first().click();
+  }
+
 }
-
-export default logInPageActions

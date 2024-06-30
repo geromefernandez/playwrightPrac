@@ -1,8 +1,9 @@
-import { test } from '@playwright/test';
-import logInPageActions from '../../fixtures/pages/loginpage'
+import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../fixtures/pages/loginpage';
 
-let LogInPageActions: logInPageActions
+test('User Logs in to amazon.com', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto("https://www.amazon.com/");
+  await loginPage.signIntoAmazon()
 
-test('User signs in', async () => {
-  await LogInPageActions.navigateToUrl('https://amazon.com/');
 });
